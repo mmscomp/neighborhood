@@ -6,32 +6,60 @@
 
 </head>
 
-<body>
+<body onload="initMap();">
     <header>
         <h2>Paris Locations</h2>
     </header>
     <div class- "container">
         <div id="menu">
             <div class="inSelect">
+                <p>
+                    <select data-bind="options: locations, 
+                optionsText: 'name', 
+                value: selectedName, 
+                optionsCaption: ''"></select>
+                </p>
+                <div data-bind="visible: selectedName">
 
-                <input data-bind="text: name" />
-                <h3 data-bind="foreach: locations">
-                    <a href="#" data-bind="click: $root.marker">
-                        <p data-bind="text: name"></p>
+                    <span data-bind="with: locations"></span>
+                    <a href="#" data-bind="click: $root.info($root.marker(selectedText(), selectedValue()))">
+
+                        <p data-bind="text: selectedText"></p>
                     </a>
-                </h3>
+                    <span data-bind="with: selectedText"></span>
+                    <span data-bind="text: selectedName() ? $root.marker(selectedText(), selectedValue()):''"></span>
+
+                </div>
+
+                <!-- ko if: !$root.selectedName() -->
+                <ul data-bind="foreach: locations">
+                    <li>
+                        <a href="#" data-bind="click: $root.info($root.marker(name, location))">
+
+                            <span data-bind="text: name"></span>
+                        </a>
+                        <span data-bind="text: name ? $root.marker(name, location):''"></span>
+
+                    </li>
+                </ul>
+
+                <!-- /ko -->
 
             </div>
 
             <div id="map">
-                <p data-bind="map: map"></p>
+
             </div>
         </div>
     </div>
-    <script src="bower_component/knockout.js"></script>
-    <script src="js/app.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9gvHI8M3MazFFG5ih5NlvJjG6xUrkElY&v=3&callback=initMap">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB9gvHI8M3MazFFG5ih5NlvJjG6xUrkElY">
     </script>
+
+    <script src="bower_component/knockout.js"></script>
+    </script>
+    <script src="js/libs/jquery.min.js"></script>
+
+    <script src="js/app.js"></script>
 
 </body>
 
