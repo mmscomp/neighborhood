@@ -1,0 +1,256 @@
+/** Neighborhood of Place that I like to visit */
+
+var map, infowindow, picture, article;
+
+
+// Create a new blank array for all the listing markers.
+var markers = [];
+
+function initMap() {
+
+    // Constructor creates a new map - only center and zoom are required.
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 48.85661400000001,
+            lng: 2.3522219
+        },
+        zoom: 12
+    });
+
+    loadAllMarkers();
+    infowindow = new google.maps.InfoWindow();
+
+}
+
+// Google map error handler
+function googleError() {
+    alert("Not loading!");
+}
+
+// KO observable
+viewModel.selectedName = ko.observable();
+
+// Location name from KO observable
+viewModel.selectedText = ko.computed({
+    read: function() {
+        return viewModel.selectedName() &&
+            viewModel.selectedName().name;
+    },
+    write: function(click) {
+        viewModel.selectedName().name;
+    },
+    owner: viewModel
+});
+
+// LatLng from KO observable
+viewModel.selectedValue = ko.computed({
+    read: function() {
+        return viewModel.selectedName() &&
+            viewModel.selectedName().location;
+    },
+    write: function(click) {
+        viewModel.selectedName().location;
+    },
+    owner: viewModel
+
+});
+
+// Load all markers
+function loadAllMarkers() {
+
+    var largeInfoWindow = new google.maps.InfoWindow();
+    var bounds = new google.maps.LatLngBounds();
+
+    // Markers corresponding to locations
+    for (var i = 0; i < viewModel.locations.length; i++) {
+        var position = viewModel.locations[i].location;
+        var title = viewModel.locations[i].name;
+        // Create a marker
+        var marker = new google.maps.Marker({
+            map: map,
+            position: position,
+            title: title,
+            animation: google.maps.Animation.DROP,
+            id: i
+        });
+
+        // Build markers list
+        markers.push(marker);
+        //
+        viewModel.clickMarkers(markers[i].title);
+    }
+}
+
+// Filter the selection
+viewModel.filterMe = function filterMarker(name) {
+    infowindow.close();
+    for (var i = 0; i < markers.length; i++) {
+        if (markers[i].title === name) {
+            markers[i].setVisible(true);
+            markers[i].animation = google.maps.Animation.BOUNCE;
+        } else {
+            markers[i].setVisible(false);
+        }
+    }
+};
+
+// Show all markers
+viewModel.allMarkers = function showAll(name) {
+    console.log(98);
+    if (infowindow) {
+        infowindow.close();
+    }
+    for (var i = 0; i < markers.length; i++) {
+        if (markers[i].title === name) {
+            markers[i].setVisible(true);
+            markers[i].setAnimation(null);
+        }
+    }
+};
+
+// Response to a click on a marker
+viewModel.clickMarkers = function clickMarker(name) {
+
+    for (var i = 0; i < markers.length; i++) {
+        if (markers[i].title === name) {
+            infoOpen(markers[i]);
+        }
+    }
+};
+
+// Infowindow activation
+function infoOpen(marker) {
+    marker.addListener('click', function() {
+        for (var i = 0; i < markers.length; i++) {
+            if (markers[i] != marker) {
+                if (markers[i].getAnimation() !== null) {
+                    console.log(119 + markers[i].title);
+                    markers[i].setAnimation(null);
+                }
+            }
+        }
+
+        marker.setVisible(true);
+
+        marker.animation = google.maps.Animation.BOUNCE;
+
+        viewModel.info(this);
+    });
+
+}
+
+// Response to a click on the listview
+viewModel.clickMeDOM = function clickMarkerDOM(name) {
+    console.log(158 + " " + name);
+    for (var i = 0; i < markers.length; i++) {
+        if (markers[i].title != name) {
+            if (markers[i].getAnimation() !== null) {
+                markers[i].setAnimation(null);
+            }
+        } else {
+
+            console.log(158 + " " + name);
+            markers[i].setVisible(true);
+
+            markers[i].animation = google.maps.Animation.BOUNCE;
+            viewModel.info(markers[i]);
+        }
+
+    }
+};
+
+
+// This function populates the infowindow when the marker is clicked. We'll only allow
+// one infowindow which will open at the marker that is clicked, and populate based
+// on that markers position.
+
+viewModel.info = function populateInfoWindow(marker) {
+    // Check to make sure the infowindow is not already opened on this marker.
+    //  var infowindow = new google.maps.InfoWindow();
+    //   var bounds = new google.maps.LatLngBounds();
+    console.log(148 + " " + marker.title);
+    var lt = "https://pixabay.com/api/?key=YOUR KEy&q=" + marker.title + "&paris,france&image=photo"; // eiffel%20tower,paris&image=photo";
+
+    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&paris,france&limit=1&format=json&callback=wikiCallback';
+
+    /*   $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            jsonp: "callback"
+        }).done(function(response) {
+            var pic = response.hits[0] ? response.hits[0].webformatURL : " data not available!";
+            picture = pic;
+            $.ajax({
+                url: wikiUrl,
+                dataType: "jsonp",
+                jsonp: "callback"
+            }).done(function(data) {
+                var art = data[2] ? data[2] : " data not available!";
+                article = art;
+
+            }).fail(function(jqXHR, textStatus) {
+                alert("Wikipedia link not found!");
+            });
+        }).fail(function(jqXHR, textStatus) {
+            alert("A picture could not be loaded.");
+        });
+
+
+        if (infowindow.marker != marker) {
+            infowindow.marker = marker;
+            infowindow.setContent('<div><img src="' + picture + '"> <span>' + article + '</span></div>');
+            infowindow.open(map, marker);
+
+            // Make sure the marker property is cleared if the infowindow is closed.
+            infowindow.addListener('closeclick', function() {
+                infowindow.setMarker = null;
+            });
+        }
+    }*/
+
+    // Open an infoWindow
+    infowindow.open(map, marker);
+    $.when(ajax1(), ajax2()).done(function(a1, a2) {
+        console.log(216 + " " + a1[0].hits.length + " " + a2[2].status);
+        if (a1[0].hits.length === 0 && a2[0] === null) {
+            infowindow.setContent('<div><span>Image not found </span></br><span>' + 'Also, no info found in wokipedia' + '</span></div');
+        } else if (a1[0].hits.length === 0 && a2[0] !== null) {
+            infowindow.setContent('<div><span>No image located! </span></br><span>' + a2[0] + '</span></div');
+        } else if (a1[0].hits.length > 0 && a2[0] === null) {
+            infowindow.setContent('<div><img src="' + a1[0].hits[0].webformatURL + '"> <span>' + 'No info found!' + '</span></div');
+        } else if (a1[0].hits.length > 0 && a2[0] !== null) {
+            infowindow.setContent('<div><img src="' + a1[0].hits[0].webformatURL + '"> <span>' + a2[0] + '</span></div');
+        }
+    });
+
+    // Ajax call for an image from pixabay
+    function ajax1() {
+        return $.ajax({
+            url: lt,
+            dataType: "jsonp",
+            jsonp: "callback"
+        }).done(function(response) {
+            var pic = response.hits[0] ? response.hits[0].webformatURL : " data not available!";
+            picture = pic;
+        }).fail(function(jqXHR, textStatus) {
+            alert("A picture could not be loaded.");
+        });
+    }
+
+    // Ajax call for a wikipedia intro
+    function ajax2() {
+        return $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            jsonp: "callback"
+        }).done(function(data) {
+            var art = data[2] ? data[2] : " data not available!";
+            article = art;
+
+        }).fail(function(jqXHR, textStatus) {
+            alert("Wikipedia link not found!");
+        });
+    }
+
+};
+ko.applyBindings(viewModel);

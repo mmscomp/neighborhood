@@ -2,64 +2,66 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Paris</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
-<body onload="initMap();">
+<body>
     <header>
         <h2>Paris Locations</h2>
     </header>
-    <div class- "container">
-        <div id="menu">
-            <div class="inSelect">
-                <p>
-                    <select data-bind="options: locations, 
+    <!--  <div class="container">-->
+    <div id="menu">
+        <div class="inSelect">
+            <p>
+                <select data-bind="options: locations, 
                 optionsText: 'name', 
                 value: selectedName, 
                 optionsCaption: ''"></select>
-                </p>
-                <div data-bind="visible: selectedName">
+            </p>
+            <div data-bind="visible: selectedName">
 
-                    <span data-bind="with: locations"></span>
-                    <a href="#" data-bind="click: $root.info($root.marker(selectedText(), selectedValue()))">
+                <span data-bind="with: locations"></span>
+                <a href="#" data-bind="click: function(){$root.clickMeDOM(selectedText())}">
+                    <p data-bind="text: selectedText"></p>
+                </a>
+                <span data-bind="with: selectedText"></span>
+                <span data-bind="text: selectedName() ? $root.filterMe(selectedText()):''"></span>
 
-                        <p data-bind="text: selectedText"></p>
+            </div>
+
+            <!-- ko if: !$root.selectedName() -->
+            <ul data-bind="foreach: locations">
+                <li>
+                    <a href="#" data-bind="click: function() {$root.clickMeDOM(name)}">
+                        <span data-bind="text: name "></span>
                     </a>
-                    <span data-bind="with: selectedText"></span>
-                    <span data-bind="text: selectedName() ? $root.marker(selectedText(), selectedValue()):''"></span>
+                    <span data-bind="text: name ? $root.allMarkers(name):''"></span>
 
-                </div>
+                </li>
+            </ul>
 
-                <!-- ko if: !$root.selectedName() -->
-                <ul data-bind="foreach: locations">
-                    <li>
-                        <a href="#" data-bind="click: $root.info($root.marker(name, location))">
+            <!-- /ko -->
 
-                            <span data-bind="text: name"></span>
-                        </a>
-                        <span data-bind="text: name ? $root.marker(name, location):''"></span>
+        </div>
 
-                    </li>
-                </ul>
-
-                <!-- /ko -->
-
-            </div>
-
-            <div id="map">
-
-            </div>
+        <div id="map">
+            <div id="pixa"></div>
+            <div id="wiki"></div>
         </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB9gvHI8M3MazFFG5ih5NlvJjG6xUrkElY">
-    </script>
+    <!--  </div> -->
 
     <script src="bower_component/knockout.js"></script>
-    </script>
     <script src="js/libs/jquery.min.js"></script>
-
+    <script src="js/data.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB9gvHI8M3MazFFG5ih5NlvJjG6xUrkElY&callback=initMap" async defer onerror="googleError()">
+    </script>
+
 
 </body>
 
