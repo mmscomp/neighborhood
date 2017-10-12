@@ -37,7 +37,7 @@
              margin: auto;
              overflow: hidden;*/
             flex-basis: 50%;
-            background: lightblue;
+            background: #787877;
             border-right: 1pt solid black;
         }
         
@@ -68,9 +68,11 @@
         
         a {
             text-decoration: none;
+            margin-left: 0;
         }
         
         li {
+            margin-left: 0;
             list-style-type: none;
         }
         

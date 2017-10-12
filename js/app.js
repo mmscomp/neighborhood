@@ -169,7 +169,7 @@ viewModel.info = function populateInfoWindow(marker) {
     //  var infowindow = new google.maps.InfoWindow();
     //   var bounds = new google.maps.LatLngBounds();
     console.log(148 + " " + marker.title);
-    var lt = "https://pixabay.com/api/?key=YOUR KEy&q=" + marker.title + "&paris,france&image=photo"; // eiffel%20tower,paris&image=photo";
+    var lt = "https://pixabay.com/api/?key=6400784-6502739bfc92fac659c45670a&q=" + marker.title + "&paris,france&image=photo"; // eiffel%20tower,paris&image=photo";
 
     var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&paris,france&limit=1&format=json&callback=wikiCallback';
 
