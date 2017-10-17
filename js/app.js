@@ -54,7 +54,10 @@ viewModel.selectedValue = ko.computed({
     owner: viewModel
 
 });
-
+//ko for city
+viewModel.city = ko.observable("");
+var c = viewModel.city;
+console.log(c);
 // Load all markers
 function loadAllMarkers() {
 
