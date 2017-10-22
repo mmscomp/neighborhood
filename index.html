@@ -45,8 +45,11 @@
             </ul>
 
             <!-- /ko -->
-        <span data-bind = "text: city"></span>
-        <input data-bind="value: city, valueUpdate: 'afterkeydown'">
+      <a href="#" data-bind="click: function() {$root.findCity(city)}">
+        <span data-bind = "text: city"></span><br>
+      </a>
+        <input data-bind="textInput: city"> <!--"value: city, valueUpdate: 'afterkeydown'">-->
+  <!-- <span data-bind="text: city ? $root.findCity(city):''"></span>-->
         </div>
 
         <div id="map"></div>

@@ -29,19 +29,17 @@ function googleError() {
 
 // KO observable
 viewModel.selectedName = ko.observable();
-
 // Location name from KO observable
 viewModel.selectedText = ko.computed({
     read: function() {
         return viewModel.selectedName() &&
             viewModel.selectedName().name;
     },
-    write: function(click) {
+    write: function() {
         viewModel.selectedName().name;
     },
     owner: viewModel
 });
-
 // LatLng from KO observable
 viewModel.selectedValue = ko.computed({
     read: function() {
@@ -55,9 +53,57 @@ viewModel.selectedValue = ko.computed({
 
 });
 //ko for city
-viewModel.city = ko.observable("");
-var c = viewModel.city;
-console.log(c);
+
+viewModel.city = ko.observable("France");
+console.log(1 + viewModel.city());
+viewModel.cityText = ko.computed({
+    read: function() {
+        return viewModel.city();
+    },
+    write: function(value) {
+        var lsp = value.lastIndexOf(" ");
+        if(lsp > 0) {
+        viewModel.city(value.substring(0,lsp));
+       console.log(3 + value);
+     }
+    },
+    owner: viewModel
+});
+console.log(2 + viewModel.cityText());
+// Load  marker for input city
+function loadInputMarker() {
+
+    var largeInfoWindow = new google.maps.InfoWindow();
+    var bounds = new google.maps.LatLngBounds();
+
+    // Markers corresponding to locations
+  //  for (var i = 0; i < viewModel.locations.length; i++) {
+      var sURL = "http://maps.googleapis.com/maps/api/geocode/json?address="+viewModel.city();
+$.ajax({
+        url: sURL,
+        dataType:'json'}).done(function(response){
+          var position = response.results[0].geometry.location;
+          
+         
+       // var position = viewModel.locations[i].location;
+        var title = viewModel.city();
+        console.log(9999, " ", title, position);
+        // Create a marker
+        var marker = new google.maps.Marker({
+            map: map,
+            position: position,
+            title: title,
+            animation: google.maps.Animation.DROP,
+        //    id: i
+        });
+
+        // Build markers list
+        markers.push(marker);
+        //
+//        viewModel.clickMarkers(markers[i].title);
+    })
+}
+
 // Load all markers
 function loadAllMarkers() {
 
@@ -99,7 +145,7 @@ viewModel.filterMe = function filterMarker(name) {
 
 // Show all markers
 viewModel.allMarkers = function showAll(name) {
-    console.log(98);
+  //  console.log(98+ name);
     if (infowindow) {
         infowindow.close();
     }
@@ -162,7 +208,11 @@ viewModel.clickMeDOM = function clickMarkerDOM(name) {
     }
 };
 
-
+//Find a city
+viewModel.findCity = function findCity(city){
+     console.log(88 + " " + city());
+     loadInputMarker();
+}
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
 // on that markers position.
