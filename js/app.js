@@ -88,6 +88,14 @@ $.ajax({
        // var position = viewModel.locations[i].location;
         var title = viewModel.city();
         console.log(9999, " ", title, position);
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: position.lat,
+            lng: position.lng
+        },
+        zoom: 15
+    });
+
         // Create a marker
         var marker = new google.maps.Marker({
             map: map,
