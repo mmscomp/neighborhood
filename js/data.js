@@ -1,3 +1,8 @@
+
+var places = ['eateries','parks','cinema','libraries','schools'];
+
+
+
 var Place = function(name, location) {
     this.name = name;
     this.location = location;

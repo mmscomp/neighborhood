@@ -54,7 +54,7 @@ viewModel.selectedValue = ko.computed({
 });
 //ko for city
 
-viewModel.city = ko.observable("France");
+viewModel.city = ko.observable("");
 console.log(1 + viewModel.city());
 viewModel.cityText = ko.computed({
     read: function() {
@@ -107,6 +107,7 @@ $.ajax({
 
         // Build markers list
         markers.push(marker);
+        viewModel.clickMarkers(marker.title);
         //
 //        viewModel.clickMarkers(markers[i].title);
     })
@@ -234,6 +235,12 @@ viewModel.info = function populateInfoWindow(marker) {
 
     var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&paris,france&limit=1&format=json&callback=wikiCallback';
 
+    var lt1 = "https://pixabay.com/api/videos/?key=6400784-6502739bfc92fac659c45670a&q=" + marker.title + "&video_type=all"; 
+
+    var wikiUrl1 = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&limit=1&format=json&callback=wikiCallback';
+
+
+
     /*   $.ajax({
             url: wikiUrl,
             dataType: "jsonp",
@@ -302,6 +309,50 @@ viewModel.info = function populateInfoWindow(marker) {
     function ajax2() {
         return $.ajax({
             url: wikiUrl,
+            dataType: "jsonp",
+            jsonp: "callback"
+        }).done(function(data) {
+            var art = data[2] ? data[2] : " data not available!";
+            article = art;
+
+        }).fail(function(jqXHR, textStatus) {
+            alert("Wikipedia link not found!");
+        });
+    }
+
+    // Open an infoWindow
+    infowindow.open(map, marker);
+    $.when(ajax3(), ajax4()).done(function(a1, a2) {
+        console.log(216 + " " + a1[0].hits.length + " " + a2[2].status);
+        if (a1[0].hits.length === 0 && a2[0] === null) {
+            infowindow.setContent('<div><span>Image not found </span></br><span>' + 'Also, no info found in wokipedia' + '</span></div');
+        } else if (a1[0].hits.length === 0 && a2[0] !== null) {
+            infowindow.setContent('<div><span>No image located! </span></br><span>' + a2[0] + '</span></div');
+        } else if (a1[0].hits.length > 0 && a2[0] === null) {
+            infowindow.setContent('<div><iframe src="' + a1[0].hits[0].videos.medium.url + '"></iframe> <span>' + 'No info found!' + '</span></div');
+        } else if (a1[0].hits.length > 0 && a2[0] !== null) {
+            infowindow.setContent('<div><iframe src="' + a1[0].hits[0].videos.medium.url + '"></iframe> <span>' + a2[0] + '</span></div');
+        }
+    });
+
+    // Ajax call for an image from pixabay
+    function ajax3() {
+        return $.ajax({
+            url: lt1,
+            dataType: "jsonp",
+            jsonp: "callback"
+        }).done(function(response) {
+            var pic = response.hits[0] ? response.hits[0].videos.medium.url : " data not available!";
+            picture = pic;
+        }).fail(function(jqXHR, textStatus) {
+            alert("A picture could not be loaded.");
+        });
+    }
+
+    // Ajax call for a wikipedia intro
+    function ajax4() {
+        return $.ajax({
+            url: wikiUrl1,
             dataType: "jsonp",
             jsonp: "callback"
         }).done(function(data) {
