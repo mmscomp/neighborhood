@@ -1,7 +1,6 @@
-
-var places = ['eateries','parks','cinema','libraries','schools'];
-
-
+var site = function (place){
+    this.place = place;
+}
 
 var Place = function(name, location) {
     this.name = name;
@@ -11,6 +10,11 @@ var Place = function(name, location) {
 var viewModel = {};
 
 //
+viewModel.places = [new site('eateries'),
+                    new site('parks'),
+                    new site('cinema'),
+                    new site('libraries'),
+                    new site('schools')];
 viewModel.locations = [new Place(
     'Eiffel Tower', {
         lat: 48.8537009999999,
