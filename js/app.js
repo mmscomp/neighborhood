@@ -53,6 +53,8 @@ viewModel.selectedValue = ko.computed({
     owner: viewModel
 
 });
+
+console.log(1 + " " + viewModel.selectedNameText);
 //KO for places
 // KO observable
 viewModel.selectedPlace = ko.observable("");
@@ -69,7 +71,7 @@ viewModel.selectedPlaceText = ko.computed({
 console.log(12 + " " + viewModel.selectedPlaceText());
 //ko for city
 
-viewModel.city = ko.observable("");
+viewModel.city = ko.observable("Paris");
 console.log(1 + viewModel.city());
 viewModel.cityText = ko.computed({
     read: function() {
@@ -101,10 +103,11 @@ function searchBoxPlaces(searchBox) {
 
 // This function firest when the user select "go" on the places search.
 // It will do a nearby search using the entered query string or place.
-viewModel.searchPlaces = function textSearchPlaces(place) {
-        placeMarkers = [];
+/*viewModel.searchPlaces = function textSearchPlaces(place) {
+        //  placeMarkers = [];
         var bounds = map.getBounds();
-        //      hideMarkers(placeMarkers);
+        hideMarkers(placeMarkers);
+        console.log(108 + place);
         var placesService = new google.maps.places.PlacesService(map);
         placesService.textSearch({
             query: place + '&' + viewModel.cityText(),
@@ -112,14 +115,18 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
         }, function(results, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 createMarkersForPlaces(results);
+                locationAll = results;
+                console.log(111 + " " + locationAll[0].name);
             }
         });
-    }
+    }*/
     // This function creates markers for each place found in either places search.
 function createMarkersForPlaces(places) {
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
+        console.log(121 + " " + place.geometry.location);
+
         var icon = {
             url: place.icon,
             size: new google.maps.Size(35, 35),
@@ -205,6 +212,12 @@ function getPlacesDetails(marker, infowindow) {
     });
 }
 
+// This function will loop through the listings and hide them all.
+function hideMarkers(markers) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+}
 
 // Load  marker for input city
 function loadInputMarker() {
@@ -356,7 +369,7 @@ viewModel.clickMeDOM = function clickMarkerDOM(name) {
 
 //Find a city
 viewModel.findCity = function findCity(city) {
-        console.log(88 + " " + city());
+        //      console.log(88 + " " + city());
         loadInputMarker();
     }
     // This function populates the infowindow when the marker is clicked. We'll only allow

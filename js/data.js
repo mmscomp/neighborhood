@@ -1,4 +1,26 @@
-var site = function (place){
+var locationAll = [];
+var viewModel = [];
+// This function firest when the user select "go" on the places search.
+// It will do a nearby search using the entered query string or place.
+viewModel.searchPlaces = function textSearchPlaces(place) {
+        //  placeMarkers = [];
+        var bounds = map.getBounds();
+        hideMarkers(placeMarkers);
+        console.log(108 + place);
+        var placesService = new google.maps.places.PlacesService(map);
+        placesService.textSearch({
+            query: place + '&' + viewModel.cityText(),
+            bounds: bounds
+        }, function(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                createMarkersForPlaces(results);
+                locationAll = results;
+                console.log(111 + " " + locationAll[0].name);
+            }
+        });
+    }
+console.log(0 + " " + locationAll[0]);
+var site = function(place) {
     this.place = place;
 }
 
@@ -7,14 +29,16 @@ var Place = function(name, location) {
     this.location = location;
 };
 
-var viewModel = {};
+//var viewModel = {};
 
 //
 viewModel.places = [new site('eateries'),
-                    new site('parks'),
-                    new site('cinema'),
-                    new site('libraries'),
-                    new site('schools')];
+    new site('parks'),
+    new site('cinema'),
+    new site('libraries'),
+    new site('schools'),
+    new site('tourist-attraction')
+];
 viewModel.locations = [new Place(
     'Eiffel Tower', {
         lat: 48.8537009999999,

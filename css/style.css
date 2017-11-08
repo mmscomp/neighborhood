@@ -37,7 +37,7 @@
              margin: auto;
              overflow: hidden;*/
             flex-basis: 50%;
-            background: #787877;
+            background: lightblue;/*#787877;*/
             border-right: 1pt solid black;
         }
         
