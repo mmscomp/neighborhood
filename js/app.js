@@ -104,8 +104,8 @@ var result;
 // This function firest when the user select "go" on the places search.
 // It will do a nearby search using the entered query string or place.
 viewModel.searchPlaces = function textSearchPlaces(place) {
-          placeMarkers = [];
-        console.log("110 " + place );
+       //   placeMarkers = [];
+        console.log("110 " + place + " " + placeMarkers );
         var bounds = map.getBounds();
         hideMarkers(placeMarkers);
         console.log(108 + place);
@@ -120,12 +120,6 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
             }
         });
 }
-console.log(777 + result);
-viewModel.locationAll = function fillIn(values){
-console.log(888 + values);
-            return values;
-}
-console.log(999 + viewModel.locationAll);
 
     
     // This function creates markers for each place found in either places search.
@@ -145,7 +139,7 @@ function createMarkersForPlaces(places) {
         // Create a marker for each place.
         var marker = new google.maps.Marker({
             map: map,
-            icon: icon,
+          //  icon: icon,
             title: place.name,
             position: place.geometry.location,
             id: place.place_id
@@ -171,6 +165,8 @@ function createMarkersForPlaces(places) {
     }
     map.fitBounds(bounds);
 }
+
+//console.log(333 + " " + placeMarkers[0].title);
 // This is the PLACE DETAILS search - it's the most detailed so it's only
 // executed when a marker is selected, indicating the user wants more
 // details about that place.
