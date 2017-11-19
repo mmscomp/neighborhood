@@ -1,8 +1,9 @@
-var locationAll = [];
 var viewModel = [];
+
+//viewModel.locationAll = [];
 // This function firest when the user select "go" on the places search.
 // It will do a nearby search using the entered query string or place.
-viewModel.searchPlaces = function textSearchPlaces(place) {
+/*viewModel.searchPlaces = function textSearchPlaces(place) {
         //  placeMarkers = [];
         var bounds = map.getBounds();
         hideMarkers(placeMarkers);
@@ -18,8 +19,8 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
                 console.log(111 + " " + locationAll[0].name);
             }
         });
-    }
-console.log(0 + " " + locationAll[0]);
+    }*/
+//console.log(0 + " " + locationAll[0]);
 var site = function(place) {
     this.place = place;
 }
@@ -114,3 +115,5 @@ viewModel.locations = [new Place(
         }
     */
 )];
+
+

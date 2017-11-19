@@ -6,7 +6,6 @@ var map, infowindow, picture, article;
 // Create a new blank array for all the listing markers.
 var markers = [];
 var placeMarkers = [];
-
 function initMap() {
 
     // Constructor creates a new map - only center and zoom are required.
@@ -18,7 +17,7 @@ function initMap() {
         zoom: 12
     });
 
-    loadAllMarkers();
+    //loadAllMarkers();
     infowindow = new google.maps.InfoWindow();
 
 }
@@ -54,7 +53,8 @@ viewModel.selectedValue = ko.computed({
 
 });
 
-console.log(1 + " " + viewModel.selectedNameText);
+console.log(1 + " " + viewModel.selectedText());
+
 //KO for places
 // KO observable
 viewModel.selectedPlace = ko.observable("");
@@ -100,11 +100,12 @@ function searchBoxPlaces(searchBox) {
         createMarkersForPlaces(places);
     }
 }
-
+var result;
 // This function firest when the user select "go" on the places search.
 // It will do a nearby search using the entered query string or place.
-/*viewModel.searchPlaces = function textSearchPlaces(place) {
-        //  placeMarkers = [];
+viewModel.searchPlaces = function textSearchPlaces(place) {
+          placeMarkers = [];
+        console.log("110 " + place );
         var bounds = map.getBounds();
         hideMarkers(placeMarkers);
         console.log(108 + place);
@@ -115,11 +116,18 @@ function searchBoxPlaces(searchBox) {
         }, function(results, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 createMarkersForPlaces(results);
-                locationAll = results;
-                console.log(111 + " " + locationAll[0].name);
+                result = results;
             }
         });
-    }*/
+}
+console.log(777 + result);
+viewModel.locationAll = function fillIn(values){
+console.log(888 + values);
+            return values;
+}
+console.log(999 + viewModel.locationAll);
+
+    
     // This function creates markers for each place found in either places search.
 function createMarkersForPlaces(places) {
     var bounds = new google.maps.LatLngBounds();
@@ -304,7 +312,7 @@ viewModel.filterMe = function filterMarker(name) {
 
 // Show all markers
 viewModel.allMarkers = function showAll(name) {
-    //  console.log(98+ name);
+      console.log(98+ name);
     if (infowindow) {
         infowindow.close();
     }
