@@ -1,4 +1,4 @@
-var viewModel = [];
+//var viewModel = [];
 
 //console.log(0 + " " + locationAll[0]);
 var site = function(place) {
@@ -10,7 +10,7 @@ var Place = function(name, location) {
     this.location = location;
 };
 
-//var viewModel = {};
+var viewModel = {};
 
 //
 viewModel.places = [new site('eateries'),
@@ -25,7 +25,8 @@ viewModel.places = [new site('eateries'),
     new site('groceries'),
     new site('colleges'),
     new site('university'),
-    new site('department stores')
+    new site('department stores'),
+    new site('banks')
 ];
 viewModel.locations = [new Place(
     'Eiffel Tower', {
