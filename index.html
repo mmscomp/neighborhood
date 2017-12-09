@@ -70,9 +70,9 @@
 
             </div>
 -->
-            <!-- ko if: !$root.selectedName()-->
-  <!--          <p data-bind="text: selectedText">  </p>
-            <ul data-bind="foreach: locationAll">
+            <!-- ko if: $root.searchPlaces(selectedPlaceText())-->
+            <p data-bind="text: selectedPlaceText">  </p>
+            <ul data-bind="foreach: placeList">
                 <li>
                     <a href="#" data-bind="click: function() {$root.clickMeDOM(name)}">
                         <span data-bind="text: name "></span>
@@ -81,7 +81,7 @@
 
                 </li>
             </ul>
--->
+
             <!-- /ko -->
 <!--/ko -->
         </div>

@@ -54,7 +54,8 @@ viewModel.selectedValue = ko.computed({
 });
 
 console.log(1 + " " + viewModel.selectedText());
-
+//
+viewModel.placeList = ko.observableArray([]);
 //KO for places
 // KO observable
 viewModel.selectedPlace = ko.observable("");
@@ -127,7 +128,9 @@ function createMarkersForPlaces(places) {
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
-        console.log(121 + " " + place.geometry.location);
+        console.log(120 + " " + place.name);
+        viewModel.placeList.push({name:place.name});
+        console.log(121 + " " + viewModel.placeList[0]);
 
         var icon = {
             url: place.icon,

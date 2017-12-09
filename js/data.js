@@ -11,7 +11,6 @@ var Place = function(name, location) {
 };
 
 var viewModel = {};
-
 //
 viewModel.places = [new site('eateries'),
     new site('parks'),
@@ -26,7 +25,8 @@ viewModel.places = [new site('eateries'),
     new site('colleges'),
     new site('university'),
     new site('department stores'),
-    new site('banks')
+    new site('banks'),
+    new site('airports')
 ];
 viewModel.locations = [new Place(
     'Eiffel Tower', {
