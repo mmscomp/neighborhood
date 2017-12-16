@@ -17,10 +17,10 @@ viewModel.places = [new site('eateries'),
     new site('cinema'),
     new site('libraries'),
     new site('schools'),
-    new site('tourist-attraction'),
-    new site('shopping-centers'),
+    new site('tourist- attraction'),
+    new site('shopping centers'),
     new site('hotels'),
-    new site('coffee-shops'),
+    new site('coffee shops'),
     new site('groceries'),
     new site('colleges'),
     new site('university'),
@@ -28,7 +28,8 @@ viewModel.places = [new site('eateries'),
     new site('banks'),
     new site('airports'),
     new site('stores'),
-    new site('salon')
+    new site('salon'),
+    new site('gas stations')
 ];
 viewModel.locations = [new Place(
     'Eiffel Tower', {
