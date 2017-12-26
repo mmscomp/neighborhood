@@ -102,7 +102,7 @@ function searchBoxPlaces(searchBox) {
     }
 }
 var result;
-// This function firest when the user select "go" on the places search.
+// This function fires when the user select "go" on the places search.
 // It will do a nearby search using the entered query string or place.
 viewModel.searchPlaces = function textSearchPlaces(place) {
        //   placeMarkers = [];
@@ -125,6 +125,7 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
     
     // This function creates markers for each place found in either places search.
 function createMarkersForPlaces(places) {
+        viewModel.placeList([]);
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
@@ -225,7 +226,6 @@ function hideMarkers(markers) {
         markers[i].setMap(null);
     }
 }
-
 // Load  marker for input city
 function loadInputMarker() {
 
@@ -356,19 +356,19 @@ function infoOpen(marker) {
 
 // Response to a click on the listview
 viewModel.clickMeDOM = function clickMarkerDOM(name) {
-    console.log(158 + " " + name);
-    for (var i = 0; i < markers.length; i++) {
-        if (markers[i].title != name) {
-            if (markers[i].getAnimation() !== null) {
-                markers[i].setAnimation(null);
+    console.log(158 + " " + name + " " + placeMarkers[0].title);
+    for (var i = 0; i < placeMarkers.length; i++) {
+        if (placeMarkers[i].title != name) {
+            if (placeMarkers[i].getAnimation() !== null) {
+                placeMarkers[i].setAnimation(null);
             }
         } else {
 
             console.log(158 + " " + name);
-            markers[i].setVisible(true);
+            placeMarkers[i].setVisible(true);
 
-            markers[i].animation = google.maps.Animation.BOUNCE;
-            viewModel.info(markers[i]);
+            placeMarkers[i].animation = google.maps.Animation.BOUNCE;
+            viewModel.info(placeMarkers[i]);
         }
 
     }

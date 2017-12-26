@@ -21,7 +21,6 @@
                 <div class="sel">
                     <input data-bind="textInput: city">
                 </div>
-                <!--"value: city, valueUpdate: 'afterkeydown'">-->
                 <div class="place">
                     <a href="#" data-bind="click: function() {$root.findCity(city)}">
                         <span data-bind="text: city"></span>
@@ -45,33 +44,10 @@
                         <a href="#" data-bind="click: function () {$root.searchPlaces(selectedPlaceText())}">
                            <p data-bind="text: selectedPlaceText"></p>
                         </a>
-<!--<span data-bind="click: $root.searchPlaces(selectedPlaceText())"></span> 
--->
                     </div>
-                    <!--                <span data-bind="with: selectedPlaceText"></span>
-                    <span data-bind="text: selectedPlace() ? $root.filterMe(selectedPlaceText()):''"></span>
-    -->
                 </div>
             </div>
-                 <!--ko if: $root.selectedPlace()-->
-<!--                <select data-bind="options: locationAll, 
-                optionsText: 'name', 
-                value: selectedName, 
-                optionsCaption: ''"></select>
-             </p>
-            <div data-bind="visible: selectedName">
-
-                <span data-bind="with: locationAll"></span>
-                <a href="#" data-bind="click: function(){$root.clickMeDOM(selectedText())}">
-                    <p data-bind="text: selectedText"></p>
-                </a>
-                <span data-bind="with: selectedText"></span>
-                <span data-bind="text: selectedName() ? $root.filterMe(selectedText()):''"></span>
-
-            </div>
--->
-            <!-- ko if: $root.searchPlaces(selectedPlaceText())-->
-            <p data-bind="text: selectedPlaceText">  </p>
+            <p data-bind="text: placeList[0]">  </p>
             <ul data-bind="foreach: placeList">
                 <li>
                     <a href="#" data-bind="click: function() {$root.clickMeDOM(name)}">
@@ -82,8 +58,6 @@
                 </li>
             </ul>
 
-            <!-- /ko -->
-<!--/ko -->
         </div>
 
         <div id="map"></div>
