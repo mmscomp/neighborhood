@@ -81,8 +81,12 @@
             height: 40px;
             font-size: 18pt;
         }
+       
+      li> a > span:hover {
+       background-color: red;
+      } 
         
-        h3 {
+       h3 {
             color: white;
         }
         
