@@ -82,6 +82,11 @@
             font-size: 18pt;
         }
        
+      li>a>span {
+           margin-left: -35px;
+           font-size: 12pt;
+         }
+
       li> a > span:hover {
        background-color: red;
       } 
