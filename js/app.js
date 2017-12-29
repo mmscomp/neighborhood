@@ -434,17 +434,18 @@ viewModel.info = function populateInfoWindow(marker) {
     }*/
 
     // Open an infoWindow
+
     infowindow.open(map, marker);
     $.when(ajax1(), ajax2()).done(function(a1, a2) {
         console.log(216 + " " + a1[0].hits.length + " " + a2[2].status);
         if (a1[0].hits.length === 0 && a2[0] === null) {
-            infowindow.setContent('<div><span>Image not found </span></br><span>' + 'Also, no info found in wokipedia' + '</span></div');
+            infowindow.setContent('<div><span>Image not found </span></br><span>' + 'Also, no info found in wokipedia' + '&emsp;<h4>more..Click the marker!</h4>' + '</span></div');
         } else if (a1[0].hits.length === 0 && a2[0] !== null) {
-            infowindow.setContent('<div><span>No image located! </span></br><span>' + a2[0] + '</span></div');
+            infowindow.setContent('<div><span>No image located! </span></br><span>' + a2[0] + '&emsp;<h4>more..Click the marker!</h4>'+ '</span></div');
         } else if (a1[0].hits.length > 0 && a2[0] === null) {
-            infowindow.setContent('<div><img src="' + a1[0].hits[0].webformatURL + '"> <span>' + 'No info found!' + '</span></div');
+            infowindow.setContent('<div><img src="' + a1[0].hits[0].webformatURL + '"> <span>' + 'No info found!' + '&emsp;<h4>more..Click the marker!</h4>' + '</span></div');
         } else if (a1[0].hits.length > 0 && a2[0] !== null) {
-            infowindow.setContent('<div><img src="' + a1[0].hits[0].webformatURL + '"> <span>' + a2[0] + '</span></div');
+            infowindow.setContent('<div><img src="' + a1[0].hits[0].webformatURL + '"> <span>' + a2[0] + '&emsp;<h4>more..Click the marker!</h4>' + '</span></div');
         }
     });
 
@@ -482,13 +483,13 @@ viewModel.info = function populateInfoWindow(marker) {
     $.when(ajax3(), ajax4()).done(function(a1, a2) {
         console.log(216 + " " + a1[0].hits.length + " " + a2[2].status);
         if (a1[0].hits.length === 0 && a2[0] === null) {
-            infowindow.setContent('<div><span>Image not found </span></br><span>' + 'Also, no info found in wokipedia' + '</span></div');
+            infowindow.setContent('<div><span>Image not found </span></br><span>' + 'Also, no info found in wokipedia' + '&emsp;<h4>more..Click the marker!</h4>' + '</span></div');
         } else if (a1[0].hits.length === 0 && a2[0] !== null) {
-            infowindow.setContent('<div><span>No image located! </span></br><span>' + a2[0] + '</span></div');
+            infowindow.setContent('<div><span>No image located! </span></br><span>' + a2[0] + '&emsp;<h4>more..Click the marker!</h4>' +'</span></div');
         } else if (a1[0].hits.length > 0 && a2[0] === null) {
-            infowindow.setContent('<div><iframe src="' + a1[0].hits[0].videos.medium.url + '"></iframe> <span>' + 'No info found!' + '</span></div');
+            infowindow.setContent('<div><iframe src="' + a1[0].hits[0].videos.medium.url + '"></iframe> <span>' + 'No info found!' + '&emsp;<h4>more..Click the marker!</h4>' + '</span></div');
         } else if (a1[0].hits.length > 0 && a2[0] !== null) {
-            infowindow.setContent('<div><iframe src="' + a1[0].hits[0].videos.medium.url + '"></iframe> <span>' + a2[0] + '</span></div');
+            infowindow.setContent('<div><iframe src="' + a1[0].hits[0].videos.medium.url + '"></iframe> <span>' + a2[0] + '&emsp;<h4>more..Click the marker!</h4>' +'</span></div');
         }
     });
 
