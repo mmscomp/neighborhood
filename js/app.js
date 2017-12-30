@@ -126,6 +126,7 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
     // This function creates markers for each place found in either places search.
 function createMarkersForPlaces(places) {
         viewModel.placeList([]);
+        console.log("129 " + places[0].rating);
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
@@ -138,7 +139,7 @@ function createMarkersForPlaces(places) {
             size: new google.maps.Size(35, 35),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(15, 34),
-            scaledSize: new google.maps.Size(25, 25)
+            scaledSize: new google.maps.Size(15, 15)
         };
         // Create a marker for each place.
         var marker = new google.maps.Marker({
@@ -207,7 +208,10 @@ function getPlacesDetails(marker, infowindow) {
                     maxHeight: 100,
                     maxWidth: 200
                 }) + '">';
-            }
+            if (place.rating) {
+                innerHTML += '<br><br><strong>Rating:</strong><br>' +
+                place.rating;
+              }}
             innerHTML += '</div>';
             infowindow.setContent(innerHTML);
             infowindow.open(map, marker);
