@@ -31,7 +31,8 @@ viewModel.places = [new site('eateries'),
     new site('salon'),
     new site('gas stations'),
     new site('temples'),
-    new site('housing apartments')
+    new site('housing apartments'),
+    new site('sports centers')
 ];
 viewModel.locations = [new Place(
     'Eiffel Tower', {
