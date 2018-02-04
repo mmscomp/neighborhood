@@ -12,7 +12,7 @@ var Place = function(name, location) {
 
 var viewModel = {};
 //
-viewModel.places = [new site('eateries'),
+viewModel.places = [new site('restaurant'),
     new site('parks'),
     new site('cinema'),
     new site('libraries'),
@@ -26,12 +26,10 @@ viewModel.places = [new site('eateries'),
     new site('university'),
     new site('department stores'),
     new site('banks'),
-    new site('airports'),
     new site('stores'),
     new site('salon'),
     new site('gas stations'),
     new site('temples'),
-    new site('housing apartments'),
     new site('sports centers')
 ];
 viewModel.locations = [new Place(

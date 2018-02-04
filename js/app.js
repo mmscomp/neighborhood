@@ -109,12 +109,14 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
         console.log("110 " + place + " " + placeMarkers );
         var bounds = map.getBounds();
         hideMarkers(placeMarkers);
-        console.log(108 + place);
+        console.log(108 + place + " " + viewModel.cityText());
         var placesService = new google.maps.places.PlacesService(map);
         placesService.textSearch({
-            query: place + '&' + viewModel.cityText(),
+            location: viewModel.cityText(),
+            query: place, // + '&' + viewModel.cityText(),
             bounds: bounds
         }, function(results, status) {
+            console.log("110 " + results); 
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 createMarkersForPlaces(results);
                 result = results;
