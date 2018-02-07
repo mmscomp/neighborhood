@@ -113,7 +113,8 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
         var placesService = new google.maps.places.PlacesService(map);
         placesService.textSearch({
             location: viewModel.cityText(),
-            query: place, // + '&' + viewModel.cityText(),
+            query: place,
+            radius: '500',
             bounds: bounds
         }, function(results, status) {
             console.log("110 " + results); 
