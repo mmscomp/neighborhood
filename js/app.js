@@ -1,6 +1,6 @@
 /** Neighborhood of Place that I like to visit */
 
-var map, infowindow, picture, article;
+var geocoder, map, infowindow, picture, article;
 
 
 // Create a new blank array for all the listing markers.
@@ -16,6 +16,10 @@ function initMap() {
         },
         zoom: 12
     });
+   //geocoder
+
+        geocoder = new google.maps.Geocoder();
+
 
     //loadAllMarkers();
     infowindow = new google.maps.InfoWindow();
@@ -109,12 +113,20 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
         console.log("110 " + place + " " + placeMarkers );
         var bounds = map.getBounds();
         hideMarkers(placeMarkers);
+        var loc;
         console.log(108 + place + " " + viewModel.cityText());
+          geocoder.geocode({'address': viewModel.cityText()}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+          //  resultsMap.setCenter(results[0].geometry.location);
+             loc = results[0].geometry.location;
+         }
+})
         var placesService = new google.maps.places.PlacesService(map);
         placesService.textSearch({
-            location: viewModel.cityText(),
+            location: loc, //viewModel.cityText(),
             query: place,
             radius: '500',
+            type: place,
             bounds: bounds
         }, function(results, status) {
             console.log("110 " + results); 

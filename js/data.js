@@ -14,12 +14,12 @@ var viewModel = {};
 //
 viewModel.places = [new site('restaurant'),
     new site('indian restaurant'),
-    new site('eatery'),
+//    new site('eatery'),
     new site('parks'),
     new site('cinema'),
     new site('libraries'),
     new site('schools'),
-    new site('tourist spots'),
+//    new site('tourist spots'),
     new site('shopping center'),
     new site('hotel'),
     new site('coffee shop'),
@@ -32,7 +32,7 @@ viewModel.places = [new site('restaurant'),
     new site('salon'),
     new site('gas stations'),
     new site('temples'),
-    new site('sports centers')
+//    new site('sports centers')
 ];
 viewModel.locations = [new Place(
     'Eiffel Tower', {
