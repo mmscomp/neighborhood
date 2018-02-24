@@ -1,10 +1,6 @@
         html,
         body {
             font-family: Arial, sans-serif;
-            /*  height: 100%;
-            margin: 0;
-            padding: 0;
-         */
         }
         
         header {
@@ -12,20 +8,6 @@
             width: 100%;
             color: white;
         }
-        /*   .container {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: space-around;
-            position: relative;
-            margin: auto;
-            overflow: hidden;
-            border: 1pt solid red;
-            /*  flex-flow: column wrap;
-           flex-grow: 1;
-           justify-content: center;
-           flex-direction: column;
-        }*/
         
         #menu {
             width: 100%;
@@ -33,9 +15,6 @@
             margin-left: 0;
             margin-right: 0;
             display: flex;
-            /*  position: relative;
-             margin: auto;
-             overflow: hidden;*/
             flex-basis: 50%;
             background: lightblue;/*#787877;*/
             border-right: 1pt solid black;
@@ -119,11 +98,3 @@
             width: 30%;
             height: 10%;
         }
-        /*#map {
-            posiiton: absolute;
-            left:340px;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            height: 800px;
-        }*/
