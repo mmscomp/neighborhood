@@ -58,11 +58,13 @@ viewModel.selectedValue = ko.computed({
 });
 
 console.log(1 + " " + viewModel.selectedText());
-//
+
+//Initializing KO array of places
 viewModel.placeList = ko.observableArray([]);
-//KO for places
+
 // KO observable
 viewModel.selectedPlace = ko.observable("");
+
 // Location name from KO observable
 viewModel.selectedPlaceText = ko.computed({
     read: function() {
@@ -74,7 +76,8 @@ viewModel.selectedPlaceText = ko.computed({
     owner: viewModel
 });
 console.log(12 + " " + viewModel.selectedPlaceText());
-//ko for city
+
+//KO for city
 
 viewModel.city = ko.observable("Paris");
 console.log(1 + viewModel.city());
@@ -186,7 +189,6 @@ function createMarkersForPlaces(places) {
     map.fitBounds(bounds);
 }
 
-//console.log(333 + " " + placeMarkers[0].title);
 // This is the PLACE DETAILS search - it's the most detailed so it's only
 // executed when a marker is selected, indicating the user wants more
 // details about that place.
@@ -284,7 +286,6 @@ function loadInputMarker() {
         // Build markers list
         markers.push(marker);
         viewModel.clickMarkers(marker.title);
-        //
         //        viewModel.clickMarkers(markers[i].title);
     })
 }
@@ -404,10 +405,8 @@ viewModel.findCity = function findCity(city) {
 
 viewModel.info = function populateInfoWindow(marker) {
     // Check to make sure the infowindow is not already opened on this marker.
-    //  var infowindow = new google.maps.InfoWindow();
-    //   var bounds = new google.maps.LatLngBounds();
     console.log(148 + " " + marker.title);
-    var lt = "https://pixabay.com/api/?key=6400784-6502739bfc92fac659c45670a&q=" + marker.title + "&paris,france&image=photo"; // eiffel%20tower,paris&image=photo";
+    var lt = "https://pixabay.com/api/?key=6400784-6502739bfc92fac659c45670a&q=" + marker.title + "&paris,france&image=photo"; /
 
     var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&paris,france&limit=1&format=json&callback=wikiCallback';
 
@@ -417,40 +416,6 @@ viewModel.info = function populateInfoWindow(marker) {
 
 
 
-    /*   $.ajax({
-            url: wikiUrl,
-            dataType: "jsonp",
-            jsonp: "callback"
-        }).done(function(response) {
-            var pic = response.hits[0] ? response.hits[0].webformatURL : " data not available!";
-            picture = pic;
-            $.ajax({
-                url: wikiUrl,
-                dataType: "jsonp",
-                jsonp: "callback"
-            }).done(function(data) {
-                var art = data[2] ? data[2] : " data not available!";
-                article = art;
-
-            }).fail(function(jqXHR, textStatus) {
-                alert("Wikipedia link not found!");
-            });
-        }).fail(function(jqXHR, textStatus) {
-            alert("A picture could not be loaded.");
-        });
-
-
-        if (infowindow.marker != marker) {
-            infowindow.marker = marker;
-            infowindow.setContent('<div><img src="' + picture + '"> <span>' + article + '</span></div>');
-            infowindow.open(map, marker);
-
-            // Make sure the marker property is cleared if the infowindow is closed.
-            infowindow.addListener('closeclick', function() {
-                infowindow.setMarker = null;
-            });
-        }
-    }*/
 
     // Open an infoWindow
 
