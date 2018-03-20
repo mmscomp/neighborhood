@@ -120,7 +120,6 @@ viewModel.searchPlaces = function textSearchPlaces(place) {
         console.log(108 + place + " " + viewModel.cityText());
           geocoder.geocode({'address': viewModel.cityText()}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
-          //  resultsMap.setCenter(results[0].geometry.location);
              loc = results[0].geometry.location;
          }
 })
@@ -254,7 +253,6 @@ function loadInputMarker() {
     var bounds = new google.maps.LatLngBounds();
 
     // Markers corresponding to locations
-    //  for (var i = 0; i < viewModel.locations.length; i++) {
     var sURL = "http://maps.googleapis.com/maps/api/geocode/json?address=" + viewModel.city();
     $.ajax({
         url: sURL,
@@ -271,7 +269,7 @@ function loadInputMarker() {
                 lat: position.lat,
                 lng: position.lng
             },
-            zoom: 15
+            zoom: 12
         });
 
         // Create a marker
@@ -396,7 +394,6 @@ viewModel.clickMeDOM = function clickMarkerDOM(name) {
 
 //Find a city
 viewModel.findCity = function findCity(city) {
-        //      console.log(88 + " " + city());
         loadInputMarker();
     }
     // This function populates the infowindow when the marker is clicked. We'll only allow

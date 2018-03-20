@@ -1,6 +1,3 @@
-//var viewModel = [];
-
-//console.log(0 + " " + locationAll[0]);
 var site = function(place) {
     this.place = place;
 }
